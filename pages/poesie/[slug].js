@@ -2,7 +2,8 @@ import fs from "fs";
 import matter from "gray-matter";
 import { remark } from "remark";
 import html from "remark-html";
-import remarkGfm from 'remark-gfm'
+import remarkGfm from 'remark-gfm';
+import Link from "next/link";
 
 export async function getStaticPaths() {
   // Retrieve all our slugs
@@ -38,12 +39,38 @@ export async function getStaticProps({ params: { slug } }) {
   };
 }
 
+function Navigation(props) {
+  if ((props.next !== "null") && (props.prev !== "null")) {
+    return (
+      <div className="px-2 flex space-x-5 font-mono">
+        <Link href={`/poesie/${props.prev}`} className="border border-gray-200 m-2 p-2 rounded-xl shadow-lg overflow-hidden">Precedente</Link>
+        <Link href={`/poesie/${props.next}`} className="border border-gray-200 m-2 p-2 rounded-xl shadow-lg overflow-hidden">Prossima</Link>
+      </div>
+    );
+  } else {
+    if (props.next !== "null") {
+      return (
+        <div className="font-mono">
+          <Link href={`/poesie/${props.next}`} className="border border-gray-200 m-2 p-2 rounded-xl shadow-lg overflow-hidden">Prossima</Link>
+        </div>
+      );
+    } else {
+      return (
+        <div className="font-mono">
+          <Link href={`/poesie/${props.prev}`} className="border border-gray-200 m-2 p-2 rounded-xl shadow-lg overflow-hidden">Precedente</Link>
+        </div>
+      );
+    }
+  }
+}
+
 export default function PoesiaPage({ frontmatter, contentHtml }) {
   return (
-    <div className="prose mx-auto px-5">
-      <h1>{frontmatter.title}</h1>
-      <h3>{frontmatter.date}</h3>
+    <div className="prose mx-auto px-5 font-mono">
+      <h1 className="text-xl">{frontmatter.title}</h1>
       <div dangerouslySetInnerHTML={{ __html: contentHtml }} />
+      <h3 className="text-lg">{frontmatter.date}</h3>
+      <Navigation prev={frontmatter.prev} next={frontmatter.next} />
     </div>
   );
 }
