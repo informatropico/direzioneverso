@@ -43,21 +43,21 @@ function Navigation(props) {
   if ((props.next !== "null") && (props.prev !== "null")) {
     return (
       <div className="px-2 flex space-x-5 font-mono">
-        <Link href={`/poesie/${props.prev}`} className="border border-gray-200 m-2 p-2 rounded-xl shadow-lg overflow-hidden">Precedente</Link>
-        <Link href={`/poesie/${props.next}`} className="border border-gray-200 m-2 p-2 rounded-xl shadow-lg overflow-hidden">Prossima</Link>
+        <Link href={`/poesie/${props.prev}`} className="border border-white m-2 p-2 rounded-xl overflow-hidden">Precedente</Link>
+        <Link href={`/poesie/${props.next}`} className="border border-white m-2 p-2 rounded-xl overflow-hidden">Prossima</Link>
       </div>
     );
   } else {
     if (props.next !== "null") {
       return (
-        <div className="font-mono">
-          <Link href={`/poesie/${props.next}`} className="border border-gray-200 m-2 p-2 rounded-xl shadow-lg overflow-hidden">Prossima</Link>
+        <div className="px-2 flex space-x-5 font-mono">
+          <Link href={`/poesie/${props.next}`} className="border border-white m-2 p-2 rounded-xl overflow-hidden">Prossima</Link>
         </div>
       );
     } else {
       return (
-        <div className="font-mono">
-          <Link href={`/poesie/${props.prev}`} className="border border-gray-200 m-2 p-2 rounded-xl shadow-lg overflow-hidden">Precedente</Link>
+        <div className="px-2 flex space-x-5 font-mono">
+          <Link href={`/poesie/${props.prev}`} className="border border-white m-2 p-2 rounded-xl overflow-hidden">Precedente</Link>
         </div>
       );
     }
