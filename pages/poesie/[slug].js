@@ -4,6 +4,7 @@ import { remark } from "remark";
 import html from "remark-html";
 import remarkGfm from 'remark-gfm';
 import Link from "next/link";
+import { prototype } from "events";
 
 export async function getStaticPaths() {
   // Retrieve all our slugs
@@ -43,21 +44,29 @@ function Navigation(props) {
   if ((props.next !== "null") && (props.prev !== "null")) {
     return (
       <div className="px-2 flex space-x-5 font-mono">
-        <Link href={`/poesie/${props.prev}`} className="border border-white m-2 p-2 rounded-xl overflow-hidden">Precedente</Link>
-        <Link href={`/poesie/${props.next}`} className="border border-white m-2 p-2 rounded-xl overflow-hidden">Prossima</Link>
+        <Link href={`/poesie/${props.prev}`} className="border border-white m-2 p-2 rounded-xl overflow-hidden">
+          Precedente
+        </Link>
+        <Link href={`/poesie/${props.next}`} className="border border-white m-2 p-2 rounded-xl overflow-hidden">
+          Prossima
+        </Link>
       </div>
     );
   } else {
     if (props.next !== "null") {
       return (
         <div className="px-2 flex space-x-5 font-mono">
-          <Link href={`/poesie/${props.next}`} className="border border-white m-2 p-2 rounded-xl overflow-hidden">Prossima</Link>
+          <Link href={`/poesie/${props.next}`} className="border border-white m-2 p-2 rounded-xl overflow-hidden">
+            Prossima
+          </Link>
         </div>
       );
     } else {
       return (
         <div className="px-2 flex space-x-5 font-mono">
-          <Link href={`/poesie/${props.prev}`} className="border border-white m-2 p-2 rounded-xl overflow-hidden">Precedente</Link>
+          <Link href={`/poesie/${props.prev}`} className="border border-white m-2 p-2 rounded-xl overflow-hidden">
+            Precedente
+          </Link>
         </div>
       );
     }
