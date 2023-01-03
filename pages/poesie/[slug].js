@@ -5,6 +5,7 @@ import html from "remark-html";
 import remarkGfm from 'remark-gfm';
 import Link from "next/link";
 import { prototype } from "events";
+import {MdHomeFilled, MdNavigateNext, MdNavigateBefore} from "react-icons/md"
 
 export async function getStaticPaths() {
   // Retrieve all our slugs
@@ -44,11 +45,12 @@ function Navigation(props) {
   if ((props.next !== "null") && (props.prev !== "null")) {
     return (
       <div className="px-2 flex space-x-5 font-mono">
-        <Link href={`/poesie/${props.prev}`} className="border border-white m-2 p-2 rounded-xl overflow-hidden">
-          Precedente
+        <Link href={`/poesie/${props.prev}`} className=" m-2 p-2 rounded-xl overflow-hidden">
+          <MdNavigateBefore />
         </Link>
-        <Link href={`/poesie/${props.next}`} className="border border-white m-2 p-2 rounded-xl overflow-hidden">
-          Prossima
+        <IntestazionePoesia data={props.data} titolo={props.titolo} />
+        <Link href={`/poesie/${props.next}`} className=" m-2 p-2 rounded-xl overflow-hidden">
+          <MdNavigateNext />
         </Link>
       </div>
     );
@@ -56,16 +58,24 @@ function Navigation(props) {
     if (props.next !== "null") {
       return (
         <div className="px-2 flex space-x-5 font-mono">
-          <Link href={`/poesie/${props.next}`} className="border border-white m-2 p-2 rounded-xl overflow-hidden">
-            Prossima
+          <Link href={`/`} className=" m-2 p-2 rounded-xl overflow-hidden">
+            <MdHomeFilled />
+          </Link>
+          <IntestazionePoesia data={props.data} titolo={props.titolo} />
+          <Link href={`/poesie/${props.next}`} className=" m-2 p-2 rounded-xl overflow-hidden">
+            <MdNavigateNext />
           </Link>
         </div>
       );
     } else {
       return (
         <div className="px-2 flex space-x-5 font-mono">
-          <Link href={`/poesie/${props.prev}`} className="border border-white m-2 p-2 rounded-xl overflow-hidden">
-            Precedente
+          <Link href={`/poesie/${props.prev}`} className="m-2 p-2 rounded-xl overflow-hidden">
+            <MdNavigateBefore />
+          </Link>
+          <IntestazionePoesia data={props.data} titolo={props.titolo} />
+          <Link href={`/`} className=" m-2 p-2 rounded-xl overflow-hidden">
+          <MdHomeFilled />
           </Link>
         </div>
       );
@@ -73,13 +83,20 @@ function Navigation(props) {
   }
 }
 
+function IntestazionePoesia(props) {
+  return (
+    <div className="flex flex-col items-center">
+      <h3 className="text-xs border-b text-gray-500">{props.data}</h3>
+      <h1 className="text-xl">{props.titolo}</h1>
+    </div>
+  )
+}
+
 export default function PoesiaPage({ frontmatter, contentHtml }) {
   return (
-    <div className="prose mx-auto px-5 font-mono">
-      <h1 className="text-xl">{frontmatter.title}</h1>
+    <div className="prose font-mono flex flex-col items-center">
+      <Navigation prev={frontmatter.prev} next={frontmatter.next} data={frontmatter.date} titolo={frontmatter.title}/>
       <div dangerouslySetInnerHTML={{ __html: contentHtml }} />
-      <h3 className="text-lg">{frontmatter.date}</h3>
-      <Navigation prev={frontmatter.prev} next={frontmatter.next} />
     </div>
   );
 }
