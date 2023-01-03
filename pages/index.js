@@ -1,6 +1,7 @@
 import fs from "fs";
 import matter from "gray-matter";
 import Link from "next/link";
+import Image from "next/image";
 
 export async function getStaticProps() {
   // Get all our posts
@@ -20,8 +21,6 @@ export async function getStaticProps() {
 
   const lastPost = posts[0];
 
-  
-
   return {
     props: {
       lastPost,
@@ -32,12 +31,9 @@ export async function getStaticProps() {
 export default function Home(props) {
   return (
     <>
-      <div className="prose flex flex-col px-4">
-        <h1 className="font-mono text-xl">Direzione Verso</h1>
-        <h2 className="font-mono text-lg">Sono ancora molto brutto ma funziono.</h2>
+      <div className="prose flex flex-col items-center">
+        <Image src={"/images/dv.png"} alt={"logo direzioneverso"} width={500} height={500} />
         <Link href={`/poesie/${props.lastPost.slug}`} className="font-mono text-xl">Inizia da qui</Link>
-      </div>
-      <div className="flex flex-row px-4">
       </div>
     </>
   );
