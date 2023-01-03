@@ -25,17 +25,25 @@ export async function getStaticProps() {
   };
 }
 
+function LinkPoesia(props) {
+  return (
+    <div className="flex flex-col items-center">
+      <h3 className="text-xs border-b">{props.data}</h3>
+      <h1 className="text-xl">{props.titolo}</h1>
+    </div>
+  )
+}
+
 export default function Poesie({ posts }) {
   return (
-    <ul className="list-none prose mx-auto">
+    <ul className="items-center mx-auto">
       {posts.map(({ slug, frontmatter }) => (
         <li
           key={slug}
-          className="border border-gray-200 m-2 rounded-xl shadow-lg overflow-hidden flex flex-col"
+          className="m-4 flex flex-col items-center font-mono hover:bg-gray-200 p-3 rounded-lg"
         >
-          <Link href={`/poesie/${slug}`} className="no-underline">
-            <h1 className="pt-4 pb-0 pl-4">{frontmatter.title}</h1>
-            <h3 className="pt-0 pb-4 pl-4">{frontmatter.date}</h3>
+          <Link href={`/poesie/${slug}`} className="no-underline ">
+            <LinkPoesia data={frontmatter.date} titolo={frontmatter.title} />
           </Link>
         </li>
       ))}
