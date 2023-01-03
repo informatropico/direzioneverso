@@ -96,7 +96,7 @@ export default function PoesiaPage({ frontmatter, contentHtml }) {
   return (
     <div className="prose font-mono flex flex-col items-center">
       <Navigation prev={frontmatter.prev} next={frontmatter.next} data={frontmatter.date} titolo={frontmatter.title}/>
-      <div dangerouslySetInnerHTML={{ __html: contentHtml }} />
+      <div dangerouslySetInnerHTML={{ __html: contentHtml }} className="p-1"/>
     </div>
   );
 }
