@@ -33,7 +33,7 @@ export default function Home(props) {
     <>
       <div className="prose flex flex-col items-center">
         <Image src={"/images/dv.png"} alt={"logo direzioneverso"} width={500} height={500} />
-        <Link href={`/poesie/${props.lastPost.slug}`} className="font-mono text-xl">Inizia da qui</Link>
+        <Link href={`/poesie/${props.lastPost.slug}`} className="font-mono text-xl">Leggi la mia ultima poesia</Link>
       </div>
     </>
   );
