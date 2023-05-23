@@ -12,7 +12,7 @@ export default function Layout({ children }) {
             Poesie
           </Link>
           <Link href="/about">
-            About
+            About me
           </Link>
         </nav>
       </header>
